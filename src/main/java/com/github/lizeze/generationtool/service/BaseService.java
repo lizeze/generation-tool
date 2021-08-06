@@ -21,9 +21,10 @@ public interface BaseService {
 
     /**
      * 获取树结构的表信息
+     *
      * @return
      */
-    List<TableTreeVO> getTableTree();
+    List<TableTreeVO> getTableTree(String dbName, String tableName);
 
 
 }

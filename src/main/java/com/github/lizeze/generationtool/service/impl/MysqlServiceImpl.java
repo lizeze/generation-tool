@@ -27,16 +27,14 @@ public class MysqlServiceImpl implements BaseService {
         this.mapper = mapper;
     }
 
-
     @Override
     public List<TableInfoVO> getTableList() {
         return mapper.tableName();
     }
 
     @Override
-    public List<TableTreeVO> getTableTree() {
+    public List<TableTreeVO> getTableTree(String dbName, String tableName) {
         List<TableTreeVO> tableTreeVOS = new ArrayList<>();
-
         List<TableInfoVO> list = this.getTableList();
         Map<String, String> dbMap = new HashMap();
         list.forEach(item -> {
@@ -44,22 +42,15 @@ public class MysqlServiceImpl implements BaseService {
                 dbMap.put(item.getDbName(), "");
             }
         });
-
-
         dbMap.entrySet().forEach(item -> {
             TableTreeVO tableTreeVO = new TableTreeVO(item.getKey());
             List<TableInfoVO> tableInfoVOS = new ArrayList<>();
-            list.stream().filter(t->t.getDbName().equals(item.getKey())).collect(Collectors.toList()).forEach(table->{
+            list.stream().filter(t -> t.getDbName().equals(item.getKey())).collect(Collectors.toList()).forEach(table -> {
                 tableTreeVO.getTables().add(table);
             });
-
-
-
             tableTreeVOS.add(tableTreeVO);
 
         });
-
-
         return tableTreeVOS;
     }
 }

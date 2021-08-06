@@ -18,7 +18,7 @@ import java.util.List;
 public class TestController {
 
 
-    BaseService mysqlService;
+    private BaseService mysqlService;
 
     public TestController(@Qualifier("mysql") BaseService mysqlService) {
         this.mysqlService = mysqlService;
@@ -26,17 +26,12 @@ public class TestController {
 
     @GetMapping("table")
     public List<TableInfoVO> ll() {
-
-
         return mysqlService.getTableList();
     }
 
     @GetMapping("table/tree")
     public List<TableTreeVO> treeList() {
-
-        return mysqlService.getTableTree();
-
+        return mysqlService.getTableTree("", "");
     }
-
 
 }

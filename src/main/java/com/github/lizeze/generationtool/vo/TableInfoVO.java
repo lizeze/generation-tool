@@ -10,8 +10,6 @@ public class TableInfoVO {
 
     private String tableName;
     private String dbName;
-
     private String remark;
-
 
 }
